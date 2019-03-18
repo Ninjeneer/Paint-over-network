@@ -52,7 +52,7 @@ public class Window extends JFrame implements ActionListener {
 		this.btSend.addActionListener(this);
 
 		this.drawZone = new Canvas();
-		this.drawZone.setPreferredSize(new Dimension(500, 600));
+		this.drawZone.setPreferredSize(new Dimension(400, 600));
 
 		JPanel inputContainer = new JPanel(new BorderLayout());
 		inputContainer.add(this.tfInput);

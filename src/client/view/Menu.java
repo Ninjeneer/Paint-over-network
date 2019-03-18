@@ -21,7 +21,7 @@ public class Menu extends JMenuBar implements ActionListener {
 
 	/**
 	 * Crée une barre de menu
-	 * 
+	 *
 	 * @param w frame mère
 	 */
 	public Menu(Window w) {

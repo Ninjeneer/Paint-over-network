@@ -9,7 +9,7 @@ public class Serializer {
 
 	/**
 	 * Serialize un objet sans passer par un fichier
-	 * 
+	 *
 	 * @param o objet à serializer
 	 * @return string
 	 */
@@ -42,7 +42,7 @@ public class Serializer {
 
 	/**
 	 * Déserialize un objet sans passer par un fichier
-	 * 
+	 *
 	 * @param serializedInput objet serialisé
 	 * @return Object
 	 */

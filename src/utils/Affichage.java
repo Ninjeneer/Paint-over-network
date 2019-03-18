@@ -15,7 +15,7 @@ public class Affichage {
 	public static final String cyan = "\033[0;36m";
 	public static final String grey = "\033[0;37m";
 
-	public static final String[] colors = new String[] { red, green, yellow, blue, pink, cyan, grey };
+	public static final String[] colors = new String[]{red, green, yellow, blue, pink, cyan, grey};
 
 	public static String randomColor() {
 		return Affichage.colors[(int) (Math.random() * Affichage.colors.length)];

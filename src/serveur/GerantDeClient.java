@@ -28,7 +28,7 @@ public class GerantDeClient implements Runnable, Serializable, Comparable<Gerant
 
 	/**
 	 * Crée un gérant de client
-	 * 
+	 *
 	 * @param ts
 	 * @param s
 	 */
@@ -119,7 +119,7 @@ public class GerantDeClient implements Runnable, Serializable, Comparable<Gerant
 
 	/**
 	 * Affiche un message à l'utilisateur
-	 * 
+	 *
 	 * @param s
 	 */
 	public void showMessage(Object s) {
@@ -128,7 +128,7 @@ public class GerantDeClient implements Runnable, Serializable, Comparable<Gerant
 
 	/**
 	 * Retourne le printwriter
-	 * 
+	 *
 	 * @return PrintWriter
 	 */
 	public PrintWriter getPrintwriter() {
@@ -137,7 +137,7 @@ public class GerantDeClient implements Runnable, Serializable, Comparable<Gerant
 
 	/**
 	 * Retourne le pseudo du client
-	 * 
+	 *
 	 * @return Pseudo
 	 */
 	public String getPseudo() {
@@ -146,7 +146,7 @@ public class GerantDeClient implements Runnable, Serializable, Comparable<Gerant
 
 	/**
 	 * Retourne la couleur du pseudo du client
-	 * 
+	 *
 	 * @return couleur
 	 */
 	public String getCouleur() {
@@ -155,7 +155,7 @@ public class GerantDeClient implements Runnable, Serializable, Comparable<Gerant
 
 	/**
 	 * Retourne le socket du client
-	 * 
+	 *
 	 * @return socket
 	 */
 	public Socket getSocket() {
@@ -164,7 +164,7 @@ public class GerantDeClient implements Runnable, Serializable, Comparable<Gerant
 
 	/**
 	 * Défini le pseudo du client
-	 * 
+	 *
 	 * @param pseudo
 	 */
 	public void setPseudo(String pseudo) {
@@ -181,7 +181,7 @@ public class GerantDeClient implements Runnable, Serializable, Comparable<Gerant
 
 	/**
 	 * Retourne vrai si le client est administrateur
-	 * 
+	 *
 	 * @return est admin
 	 */
 	public boolean isAdmin() {
@@ -190,7 +190,7 @@ public class GerantDeClient implements Runnable, Serializable, Comparable<Gerant
 
 	/**
 	 * Défini si un client est administrateur
-	 * 
+	 *
 	 * @param b
 	 */
 	public void setAdmin(boolean b) {
@@ -199,7 +199,7 @@ public class GerantDeClient implements Runnable, Serializable, Comparable<Gerant
 
 	/**
 	 * Retourne si un client est muet
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean isMuted() {
@@ -208,7 +208,7 @@ public class GerantDeClient implements Runnable, Serializable, Comparable<Gerant
 
 	/**
 	 * Défini si un client est muet
-	 * 
+	 *
 	 * @param b muet
 	 */
 	public void setMuted(boolean b) {
@@ -217,7 +217,7 @@ public class GerantDeClient implements Runnable, Serializable, Comparable<Gerant
 
 	/**
 	 * Change la couleur du pseudo
-	 * 
+	 *
 	 * @param color caractère couleur
 	 */
 	public void setColor(String color) {
@@ -226,7 +226,7 @@ public class GerantDeClient implements Runnable, Serializable, Comparable<Gerant
 
 	/**
 	 * Retourne vrai si le client est encore connecté
-	 * 
+	 *
 	 * @return client encore connecté
 	 */
 	public boolean isAlive() {
@@ -245,7 +245,6 @@ public class GerantDeClient implements Runnable, Serializable, Comparable<Gerant
 	public int compareTo(GerantDeClient gdc) {
 		return this.pseudo.compareTo(gdc.getPseudo());
 	}
-
 
 
 }

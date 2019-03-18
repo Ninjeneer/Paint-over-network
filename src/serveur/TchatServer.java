@@ -84,11 +84,6 @@ public class TchatServer {
 		addCommand("blockcommand", new BlockCommand());
 		addCommand("unblockcommand", new UnBlockCommand());
 
-		// Thread de rafraîchissement de la liste des clients (côté client)
-		RefreshClientList rcl = new RefreshClientList(this);
-		Thread trcl = new Thread(rcl);
-		trcl.start();
-
 		while (true) {
 			// attente du client
 			Socket s = null;
@@ -109,7 +104,7 @@ public class TchatServer {
 
 	/**
 	 * Envoie un message à tous les clients
-	 * 
+	 *
 	 * @param sender client émetteur
 	 * @param s      message envoyé
 	 */
@@ -152,7 +147,7 @@ public class TchatServer {
 
 	/**
 	 * Envoie une notification à tous les clients
-	 * 
+	 *
 	 * @param sender
 	 * @param s
 	 */
@@ -165,7 +160,7 @@ public class TchatServer {
 
 	/**
 	 * Ajoute le client à la liste de clients
-	 * 
+	 *
 	 * @param gdc Client
 	 */
 	public void addGerantDeClient(GerantDeClient gdc) {
@@ -177,7 +172,7 @@ public class TchatServer {
 
 	/**
 	 * Supprime le client de la liste des clients
-	 * 
+	 *
 	 * @param gdc
 	 */
 	public void delGerantDeClient(GerantDeClient gdc) {
@@ -187,7 +182,7 @@ public class TchatServer {
 
 	/**
 	 * Ajoute une commande au serveur
-	 * 
+	 *
 	 * @param trigger commande utilisateur
 	 * @param cmd     commande déclenchée
 	 */
@@ -197,7 +192,7 @@ public class TchatServer {
 
 	/**
 	 * Retourne la liste des clients
-	 * 
+	 *
 	 * @return liste de clients
 	 */
 	public ArrayList<GerantDeClient> getClientList() {
@@ -206,7 +201,7 @@ public class TchatServer {
 
 	/**
 	 * Retourne la liste des commandes
-	 * 
+	 *
 	 * @return liste des commandes
 	 */
 	public HashMap<String, Commande> getCommandeList() {
@@ -214,18 +209,18 @@ public class TchatServer {
 	}
 
 	public static void main(String[] args) {
-		
+
 		int port;
 		if (args.length == 0)
 			port = 8003; //port par défaut
 		else
 			try {
 				port = Integer.parseInt(args[0]);
-			} catch(Exception e) {
+			} catch (Exception e) {
 				port = 8003;
 			}
-		
-		
+
+
 		new TchatServer(port);
 	}
 }

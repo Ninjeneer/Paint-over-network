@@ -26,7 +26,7 @@ public class ClientManager {
 
 	/**
 	 * Crée un client manager
-	 * 
+	 *
 	 * @param ctrl controleur
 	 */
 	public ClientManager(Controler ctrl) {
@@ -36,7 +36,7 @@ public class ClientManager {
 
 	/**
 	 * Établi la connexion avec le serveur cible
-	 * 
+	 *
 	 * @throws NumberFormatException
 	 * @throws UnknownHostException
 	 * @throws IOException
@@ -52,7 +52,7 @@ public class ClientManager {
 
 	/**
 	 * Envoie un message au serveur
-	 * 
+	 *
 	 * @param s message
 	 */
 	public void sendMessage(String s) {
@@ -75,14 +75,14 @@ public class ClientManager {
 					// récéption d'un message simple
 					if (reponse instanceof String) {
 						String message = (String) reponse;
-						
+
 						// suppression des caractères de format propres à la console
 						message = message.replace(Affichage.bold, "");
 						message = message.replace(Affichage.italic, "");
 						message = message.replace(Affichage.reset, "");
 						for (String color : Affichage.colors)
 							message = message.replace(color, "");
-						
+
 						for (String line : message.split("\n"))
 							this.ctrl.getWindow().newMessage(line);
 					}
@@ -101,7 +101,7 @@ public class ClientManager {
 
 	/**
 	 * Défini les informations relatives à la connexion
-	 * 
+	 *
 	 * @param serverAddress adresse IP du serveur
 	 * @param pseudo        pseudo du client
 	 */
@@ -112,7 +112,7 @@ public class ClientManager {
 
 	/**
 	 * Retourne l'adresse du serveur cible
-	 * 
+	 *
 	 * @return adresse IP
 	 */
 	public String getServerAddress() {
@@ -121,7 +121,7 @@ public class ClientManager {
 
 	/**
 	 * Retourne le pseudo du client
-	 * 
+	 *
 	 * @return pseudo
 	 */
 	public String getPseudo() {
@@ -130,7 +130,7 @@ public class ClientManager {
 
 	/**
 	 * Défini si le client est connecté
-	 * 
+	 *
 	 * @param b vrai si connecté
 	 */
 	public void setConnected(boolean b) {
@@ -139,7 +139,7 @@ public class ClientManager {
 
 	/**
 	 * Retourne si le client est connecté
-	 * 
+	 *
 	 * @return vrai si connecté
 	 */
 	public boolean isConnected() {

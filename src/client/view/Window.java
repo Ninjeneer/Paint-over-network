@@ -25,6 +25,8 @@ public class Window extends JFrame implements ActionListener {
 	private JButton btSend;
 	private DrawZone drawZone;
 	private Menu menu;
+	private JPanel drawPan;
+	private ToolBar toolBar;
 
 	private Controler ctrl;
 
@@ -63,15 +65,21 @@ public class Window extends JFrame implements ActionListener {
 		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
 
-		JPanel tchatZone = new JPanel(new BorderLayout());
-		tchatZone.add(sp);
-		tchatZone.add(inputContainer, BorderLayout.SOUTH);
+		JPanel tchatPan = new JPanel(new BorderLayout());
+		tchatPan.add(sp);
+		tchatPan.add(inputContainer, BorderLayout.SOUTH);
+
+		this.drawPan = new JPanel(new BorderLayout());
+		drawPan.add(this.drawZone);
+		this.toolBar = new ToolBar(this);
+		drawPan.add(this.toolBar, BorderLayout.NORTH);
 
 		// ajout des widgets
 		this.add(this.menu, BorderLayout.NORTH);
-		this.add(tchatZone);
-		this.add(this.drawZone, BorderLayout.EAST);
+		this.add(tchatPan);
+		this.add(drawPan, BorderLayout.EAST);
 
+		activeDrawZone(false);
 		this.setVisible(true);
 	}
 
@@ -116,5 +124,12 @@ public class Window extends JFrame implements ActionListener {
 
 	public DrawZone getDrawZone() {
 		return this.drawZone;
+	}
+
+	public ToolBar getToolBar() { return this.toolBar; }
+
+	public void activeDrawZone(boolean b) {
+		this.drawPan.setEnabled(b);
+		this.toolBar.setEnabled(b);
 	}
 }

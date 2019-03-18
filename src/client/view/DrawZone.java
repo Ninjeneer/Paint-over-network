@@ -2,11 +2,10 @@ package client.view;
 
 
 import client.controler.Controler;
-import client.model.ClientManager;
+import client.model.DrawTool;
 import client.view.shape.Circle;
 import client.view.shape.Shape;
-import client.view.shape.Rectangle;
-import utils.Serializer;
+import client.view.shape.Square;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -30,9 +29,11 @@ public class DrawZone extends Canvas implements MouseListener {
 	@Override
 	public void paint(Graphics g) {
 		for (Shape s : content) {
+			g.setColor(s.getColor());
+
 			if (s instanceof Circle)
 				g.fillArc(s.getX(), s.getY(), ((Circle) s).getR(), ((Circle) s).getR(), 0, 360);
-			else if (s instanceof Rectangle)
+			else if (s instanceof Square)
 				g.fillRect(s.getX(), s.getY(), 150, 75);
 		}
 	}
@@ -40,11 +41,16 @@ public class DrawZone extends Canvas implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		//Circle c = new Circle(e.getX(), e.getY(), 10, Color.BLACK);
-		Rectangle r = new Rectangle(e.getX(), e.getY(), Color.BLACK);
-		this.content.add(r);
-		this.repaint();
-		this.ctrl.getClientManager().sendMessage(this.content);
+		Shape shape = null;
+
+		if (this.ctrl.getTool() == DrawTool.SQUARE)
+			shape = new Square(e.getX(), e.getY(), this.ctrl.getDrawColor());
+		else if (this.ctrl.getTool() == DrawTool.CIRCLE)
+			shape = new Circle(e.getX(), e.getY(), 10, this.ctrl.getDrawColor());
+
+		this.content.add(shape); //ajout de la forme au canvas
+		this.repaint(); //refresh le canvas
+		this.ctrl.getClientManager().sendMessage(this.content); //envoie la mise à jour à tous les clients
 	}
 
 	@Override

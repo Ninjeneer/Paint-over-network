@@ -70,6 +70,7 @@ public class Menu extends JMenuBar implements ActionListener {
 					this.w.getControler().getClientManager().startGetMessage();
 					this.miConnect.setEnabled(false);
 					this.miDisconnect.setEnabled(true);
+
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(this.w, "Erreur : impossible de se connecter au serveur !", "Erreur",
 							JOptionPane.ERROR_MESSAGE);

@@ -9,7 +9,7 @@ public class Circle extends Shape implements Serializable {
 	private Color color;
 
 	public Circle(int x, int y, int r, Color c) {
-		super(x, y);
+		super(x, y, c);
 		this.r = r;
 		this.color = c;
 	}

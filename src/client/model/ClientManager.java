@@ -95,9 +95,7 @@ public class ClientManager {
                         this.ctrl.getWindow().getDrawZone().setContent((ArrayList<Shape>) reponse);
                         this.ctrl.getWindow().getDrawZone().repaint();
                     }
-
                 }
-
             } catch (IOException e) {
                 e.printStackTrace();
             }

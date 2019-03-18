@@ -4,13 +4,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import client.controler.Controler;
 import client.view.Window;
+import client.view.shape.Shape;
 import utils.Affichage;
 import utils.Serializer;
 
@@ -77,6 +80,7 @@ public class ClientManager {
 
 					// récéption d'un message simple
 					if (reponse instanceof String) {
+						System.out.println("c'est un string");
 						String message = (String) reponse;
 
 						// suppression des caractères de format propres à la console
@@ -88,8 +92,8 @@ public class ClientManager {
 
 						for (String line : message.split("\n"))
 							this.ctrl.getWindow().newMessage(line);
-					} else if (reponse instanceof ArrayList<?>) {
-
+					} else if (reponse instanceof List) {
+						this.ctrl.getWindow().getDrawZone().setContent((ArrayList<Shape>)reponse);
 					}
 
 				}
@@ -140,10 +144,6 @@ public class ClientManager {
 	 */
 	public void setConnected(boolean b) {
 		this.connected = b;
-	}
-
-	public void setView(Window v) {
-		this.view = v;
 	}
 
 }

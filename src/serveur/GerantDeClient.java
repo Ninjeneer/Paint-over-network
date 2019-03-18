@@ -81,15 +81,6 @@ public class GerantDeClient implements Runnable, Serializable, Comparable<Gerant
 
 		// message de bienvenue
 		try {
-			showMessage(Affichage.yellow
-					+ "   ___       _      _                      _____           _                _     \n"
-					+ "  |_ _|   __| |    | |     ___      o O O |_   _|   __    | |_     __ _    | |_   \n"
-					+ "   | |   / _` |    | |    / -_)    o        | |    / _|   | ' \\   / _` |   |  _|  \n"
-					+ "  |___|  \\__,_|   _|_|_   \\___|   TS__[O]  _|_|_   \\__|_  |_||_|  \\__,_|   _\\__|  \n"
-					+ "_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"| {======|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"| \n"
-					+ "\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'./o--000'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-' "
-					+ Affichage.reset);
-
 			showMessage("Bienvenue sur le serveur " + pseudo + " !");
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,9 +1,12 @@
 package client.view;
 
 
+import client.controler.Controler;
+import client.model.ClientManager;
 import client.view.shape.Circle;
 import client.view.shape.Shape;
 import client.view.shape.Rectangle;
+import utils.Serializer;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -13,10 +16,12 @@ import java.util.List;
 
 public class DrawZone extends Canvas implements MouseListener {
 
+	private Controler ctrl;
 	private List<client.view.shape.Shape> content;
 
-	public DrawZone() {
+	public DrawZone(Controler ctrl) {
 		super();
+		this.ctrl = ctrl;
 
 		this.content = new ArrayList<>();
 		this.addMouseListener(this);
@@ -41,8 +46,8 @@ public class DrawZone extends Canvas implements MouseListener {
 		//Circle c = new Circle(e.getX(), e.getY(), 10, Color.BLACK);
 		Rectangle r = new Rectangle(e.getX(), e.getY(), Color.BLACK);
 		this.content.add(r);
-
 		this.repaint();
+		this.ctrl.getClientManager().sendMessage(Serializer.serialize(this.content));
 	}
 
 	@Override
@@ -63,5 +68,10 @@ public class DrawZone extends Canvas implements MouseListener {
 	@Override
 	public void mouseExited(MouseEvent e) {
 
+	}
+
+	public void setContent(ArrayList<Shape> c) {
+		this.content = c;
+		this.repaint();
 	}
 }

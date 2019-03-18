@@ -11,8 +11,6 @@ public class Controler {
 	public Controler() {
 		this.cm = new ClientManager(this);
 		this.w = new Window(this);
-
-		this.cm.setView(this.w);
 	}
 
 	public ClientManager getClientManager() {

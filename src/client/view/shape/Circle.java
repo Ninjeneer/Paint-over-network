@@ -1,8 +1,9 @@
 package client.view.shape;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public class Circle extends Shape{
+public class Circle extends Shape implements Serializable {
 
 	private int r;
 	private Color color;

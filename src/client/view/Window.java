@@ -52,7 +52,7 @@ public class Window extends JFrame implements ActionListener {
 		this.btSend = new JButton("Envoyer");
 		this.btSend.addActionListener(this);
 
-		this.drawZone = new DrawZone();
+		this.drawZone = new DrawZone(this.ctrl);
 		this.drawZone.setPreferredSize(new Dimension(400, 600));
 
 		JPanel inputContainer = new JPanel(new BorderLayout());
@@ -112,5 +112,9 @@ public class Window extends JFrame implements ActionListener {
 	 */
 	public Controler getControler() {
 		return this.ctrl;
+	}
+
+	public DrawZone getDrawZone() {
+		return this.drawZone;
 	}
 }

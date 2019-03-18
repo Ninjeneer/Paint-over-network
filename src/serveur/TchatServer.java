@@ -94,7 +94,6 @@ public class TchatServer {
 			Socket s = null;
 			try {
 				s = ss.accept();
-
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

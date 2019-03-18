@@ -85,9 +85,6 @@ public class ClientManager {
 						
 						for (String line : message.split("\n"))
 							this.ctrl.getWindow().newMessage(line);
-					} else if (reponse instanceof ArrayList<?>) {
-						// récéption de la liste des utilisateurs connectés
-						this.ctrl.getWindow().updateConnected((ArrayList<String>) reponse);
 					}
 
 				}

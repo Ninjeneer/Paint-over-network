@@ -40,14 +40,11 @@ public class DrawZone extends Canvas implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-
-		System.out.println("click");
-
 		//Circle c = new Circle(e.getX(), e.getY(), 10, Color.BLACK);
 		Rectangle r = new Rectangle(e.getX(), e.getY(), Color.BLACK);
 		this.content.add(r);
 		this.repaint();
-		this.ctrl.getClientManager().sendMessage(Serializer.serialize(this.content));
+		this.ctrl.getClientManager().sendMessage(this.content);
 	}
 
 	@Override

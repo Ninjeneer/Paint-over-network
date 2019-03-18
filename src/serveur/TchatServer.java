@@ -103,10 +103,14 @@ public class TchatServer {
 	 * Envoie un message à tous les clients
 	 *
 	 * @param sender client émetteur
-	 * @param s      message envoyé
+	 * @param o      message envoyé
 	 */
-	public void sendMessage(GerantDeClient sender, String s) {
+	public void sendMessage(GerantDeClient sender, Object o, boolean objectMode) {
 		// gestion des commandes
+        String s = "";
+        if (!objectMode)
+            s = o.toString();
+
 		if (s.startsWith("/")) {
 			String trigger;
 
@@ -135,8 +139,10 @@ public class TchatServer {
 			// envoi du message
 			for (GerantDeClient gdc : this.clientList) {
 				if (gdc != sender && !sender.isMuted() && sender.isAlive())
-					gdc.showMessage(sender.getCouleur() + sender.getPseudo() + ": " + "\033[0m" + s);
-
+				    if (!objectMode)
+					    gdc.showMessage(sender.getCouleur() + sender.getPseudo() + ": " + "\033[0m" + s);
+				    else
+				        gdc.showMessage(o);
 			}
 		}
 	}

@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import utils.Affichage;
 import utils.Serializer;
@@ -92,10 +93,12 @@ public class GerantDeClient implements Runnable, Serializable, Comparable<Gerant
 		// boucle principale
 		while (this.tAlive) {
 			try {
-				String message = in.readLine();
+				Object message = Serializer.deserialize(in.readLine());
+
+				boolean objectMode = message instanceof ArrayList;
 
 				if (System.currentTimeMillis() - this.lastMessage >= 500) {
-					this.ts.sendMessage(this, message);
+					this.ts.sendMessage(this, message, objectMode);
 				} else {
 					showMessage(Affichage.red + "ATTENTION : évitez le spam !" + Affichage.reset);
 				}

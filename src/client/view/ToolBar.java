@@ -3,33 +3,44 @@ package client.view;
 import client.model.DrawTool;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ToolBar extends JPanel implements ActionListener {
+public class ToolBar extends JPanel implements ActionListener, ChangeListener {
 
     private Window w;
     private JButton squareTool;
     private JButton circleTool;
     private JButton colorChooser;
+    private JSlider sizeSlider;
 
     public ToolBar(Window w) {
         this.w = w;
-        this.setLayout(new GridLayout(1, 3));
+        this.setLayout(new GridLayout(2, 1));
+        JPanel toolsContainer = new JPanel(new GridLayout(1, 3));
 
         this.squareTool = new JButton("Carré");
         this.circleTool = new JButton("Cercle");
+        this.circleTool.setEnabled(false);
         this.colorChooser = new JButton("Couleur...");
 
         this.squareTool.addActionListener(this);
         this.circleTool.addActionListener(this);
         this.colorChooser.addActionListener(this);
 
-        this.add(this.squareTool);
-        this.add(this.circleTool);
-        this.add(this.colorChooser);
+        this.sizeSlider = new JSlider(1, 100);
+        this.sizeSlider.setValue(10);
+        this.sizeSlider.addChangeListener(this);
 
+        toolsContainer.add(this.squareTool);
+        toolsContainer.add(this.circleTool);
+        toolsContainer.add(this.colorChooser);
+
+        this.add(toolsContainer);
+        this.add(this.sizeSlider);
         this.setVisible(true);
     }
 
@@ -53,5 +64,11 @@ public class ToolBar extends JPanel implements ActionListener {
             this.circleTool.setEnabled(false);
             this.squareTool.setEnabled(true);
         }
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent changeEvent) {
+        if (changeEvent.getSource() == this.sizeSlider)
+            this.w.getControler().setDrawSize(this.sizeSlider.getValue());
     }
 }

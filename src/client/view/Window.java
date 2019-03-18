@@ -39,21 +39,25 @@ public class Window extends JFrame implements ActionListener {
 		this.setTitle("Idle Tchat");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		// création des widgets
+		// création du menu
 		this.menu = new Menu(this);
 
+		// création de la zone de tchat
 		this.taTchat = new JTextArea();
 		this.taTchat.setEditable(false);
 		this.taTchat.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 15));
 		this.taTchat.setWrapStyleWord(true);
 		this.taTchat.setLineWrap(true);
 
+		// création du champs de texte
 		this.tfInput = new JTextField();
 		this.tfInput.addActionListener(this);
 
+		// création du bouton d'envoie
 		this.btSend = new JButton("Envoyer");
 		this.btSend.addActionListener(this);
 
+		// création de la zone de dessin
 		this.drawZone = new DrawZone(this.ctrl);
 		this.drawZone.setPreferredSize(new Dimension(400, 600));
 
@@ -64,11 +68,12 @@ public class Window extends JFrame implements ActionListener {
 		JScrollPane sp = new JScrollPane(this.taTchat);
 		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-
+		// mise en page de la zone de tchat
 		JPanel tchatPan = new JPanel(new BorderLayout());
 		tchatPan.add(sp);
 		tchatPan.add(inputContainer, BorderLayout.SOUTH);
 
+		// mise en page de la zone de dessin
 		this.drawPan = new JPanel(new BorderLayout());
 		drawPan.add(this.drawZone);
 		this.toolBar = new ToolBar(this);
@@ -79,7 +84,6 @@ public class Window extends JFrame implements ActionListener {
 		this.add(tchatPan);
 		this.add(drawPan, BorderLayout.EAST);
 
-		activeDrawZone(false);
 		this.setVisible(true);
 	}
 
@@ -124,12 +128,5 @@ public class Window extends JFrame implements ActionListener {
 
 	public DrawZone getDrawZone() {
 		return this.drawZone;
-	}
-
-	public ToolBar getToolBar() { return this.toolBar; }
-
-	public void activeDrawZone(boolean b) {
-		this.drawPan.setEnabled(b);
-		this.toolBar.setEnabled(b);
 	}
 }

@@ -129,4 +129,11 @@ public class Window extends JFrame implements ActionListener {
 	public DrawZone getDrawZone() {
 		return this.drawZone;
 	}
+
+	public void activateDrawZone(boolean b) {
+		this.toolBar.squareTool.setEnabled(b);
+		this.toolBar.circleTool.setEnabled(b);
+		this.toolBar.colorChooser.setEnabled(b);
+		this.toolBar.sizeSlider.setEnabled(b);
+	}
 }

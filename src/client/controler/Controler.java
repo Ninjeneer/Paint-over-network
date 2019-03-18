@@ -13,7 +13,7 @@ public class Controler {
 
     private DrawTool drawTool = DrawTool.CIRCLE;
     private Color drawColor = null;
-    private int drawSize = 1;
+    private int drawSize;
 
     public Controler() {
         this.cm = new ClientManager(this);

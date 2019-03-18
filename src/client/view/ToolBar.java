@@ -12,10 +12,10 @@ import java.awt.event.ActionListener;
 public class ToolBar extends JPanel implements ActionListener, ChangeListener {
 
     private Window w;
-    private JButton squareTool;
-    private JButton circleTool;
-    private JButton colorChooser;
-    private JSlider sizeSlider;
+    JButton squareTool;
+    JButton circleTool;
+    JButton colorChooser;
+    JSlider sizeSlider;
 
     public ToolBar(Window w) {
         this.w = w;
@@ -34,6 +34,7 @@ public class ToolBar extends JPanel implements ActionListener, ChangeListener {
         this.sizeSlider = new JSlider(1, 100);
         this.sizeSlider.setValue(10);
         this.sizeSlider.addChangeListener(this);
+        this.w.getControler().setDrawSize(this.sizeSlider.getValue());
 
         toolsContainer.add(this.squareTool);
         toolsContainer.add(this.circleTool);

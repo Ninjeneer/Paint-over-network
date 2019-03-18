@@ -3,6 +3,7 @@ package client.view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -22,7 +23,7 @@ public class Window extends JFrame implements ActionListener {
 	private JTextArea taTchat;
 	private JTextField tfInput;
 	private JButton btSend;
-	private Canvas drawZone;
+	private DrawZone drawZone;
 	private Menu menu;
 
 	private Controler ctrl;
@@ -51,7 +52,7 @@ public class Window extends JFrame implements ActionListener {
 		this.btSend = new JButton("Envoyer");
 		this.btSend.addActionListener(this);
 
-		this.drawZone = new Canvas();
+		this.drawZone = new DrawZone();
 		this.drawZone.setPreferredSize(new Dimension(400, 600));
 
 		JPanel inputContainer = new JPanel(new BorderLayout());

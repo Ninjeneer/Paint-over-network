@@ -60,13 +60,11 @@ public class TchatServer {
 		// ajout des commandes
 		addCommand("coucou", new Coucou());
 		addCommand("mp", new MP());
-		addCommand("wizz", new Wizz());
 		addCommand("help", new Help());
 		addCommand("nick", new Nick());
 		addCommand("quit", new Quit());
 		addCommand("me", new Me());
 		addCommand("who", new Who());
-		addCommand("changercouleur", new ChangerCouleur());
 
 		// commandes admin
 		addCommand("kick", new Kick());
@@ -77,7 +75,6 @@ public class TchatServer {
 		addCommand("say", new Say());
 		addCommand("adminhelp", new AdminHelp());
 		addCommand("getinfo", new GetInfo());
-		addCommand("wizza8003ll", new WizzAll());
 		addCommand("kickall", new KickAll());
 		addCommand("muteall", new MuteAll());
 		addCommand("unmuteall", new UnMuteAll());
@@ -142,7 +139,6 @@ public class TchatServer {
 
 			}
 		}
-
 	}
 
 	/**

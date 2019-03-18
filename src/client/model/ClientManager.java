@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 
 import client.controler.Controler;
+import client.view.Window;
 import utils.Affichage;
 import utils.Serializer;
 
@@ -21,6 +22,8 @@ public class ClientManager {
 	private PrintWriter out;
 	private BufferedReader in;
 	private boolean connected;
+
+	private Window view;
 
 	private Controler ctrl;
 
@@ -85,6 +88,8 @@ public class ClientManager {
 
 						for (String line : message.split("\n"))
 							this.ctrl.getWindow().newMessage(line);
+					} else if (reponse instanceof ArrayList<?>) {
+
 					}
 
 				}
@@ -137,13 +142,8 @@ public class ClientManager {
 		this.connected = b;
 	}
 
-	/**
-	 * Retourne si le client est connecté
-	 *
-	 * @return vrai si connecté
-	 */
-	public boolean isConnected() {
-		return this.connected;
+	public void setView(Window v) {
+		this.view = v;
 	}
 
 }

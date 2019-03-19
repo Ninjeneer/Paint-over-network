@@ -6,6 +6,7 @@ import client.model.DrawTool;
 import client.view.shape.Circle;
 import client.view.shape.Shape;
 import client.view.shape.Square;
+import client.view.shape.Triangle;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -41,6 +42,8 @@ public class DrawZone extends Canvas implements MouseListener, MouseMotionListen
                 g.fillArc(s.getX(), s.getY(), ((Circle) s).getR(), ((Circle) s).getR(), 0, 360);
             else if (s instanceof Square)
                 g.fillRect(s.getX(), s.getY(), ((Square) s).getSize(), ((Square) s).getSize());
+            else if (s instanceof Triangle)
+                g.fillPolygon(((Triangle)s).getPolygon());
         }
     }
 
@@ -103,6 +106,8 @@ public class DrawZone extends Canvas implements MouseListener, MouseMotionListen
             shape = new Square(e.getX() - this.ctrl.getDrawSize() / 2, e.getY() - this.ctrl.getDrawSize() / 2, this.ctrl.getDrawSize(), this.ctrl.getDrawColor());
         else if (this.ctrl.getTool() == DrawTool.CIRCLE)
             shape = new Circle(e.getX() - this.ctrl.getDrawSize() / 2, e.getY() - this.ctrl.getDrawSize() / 2, this.ctrl.getDrawSize(), this.ctrl.getDrawColor());
+        else if (this.ctrl.getTool() == DrawTool.TRIANGLE)
+            shape = new Triangle(e.getX(), e.getY(), this.ctrl.getDrawSize(), this.ctrl.getDrawColor());
 
         this.content.add(shape); //ajout de la forme au canvas
         this.userContent.add(shape); //ajout de la forme dans l'historique des dessins

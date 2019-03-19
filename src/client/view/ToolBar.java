@@ -14,6 +14,7 @@ public class ToolBar extends JPanel implements ActionListener, ChangeListener {
     private Window w;
     JButton squareTool;
     JButton circleTool;
+    JButton triangleTool;
     JButton colorChooser;
     JButton undo;
     JSlider sizeSlider;
@@ -21,17 +22,19 @@ public class ToolBar extends JPanel implements ActionListener, ChangeListener {
     public ToolBar(Window w) {
         this.w = w;
         this.setLayout(new GridLayout(2, 1));
-        JPanel toolsContainerTop = new JPanel(new GridLayout(1, 3));
+        JPanel toolsContainerTop = new JPanel(new GridLayout(1, 4));
         JPanel toolsContainerBot = new JPanel(new BorderLayout());
 
         this.squareTool = new JButton("Carré");
         this.circleTool = new JButton("Cercle");
+        this.triangleTool = new JButton("Triangle");
         this.circleTool.setEnabled(false);
         this.colorChooser = new JButton("Couleur...");
         this.undo = new JButton("Undo");
 
         this.squareTool.addActionListener(this);
         this.circleTool.addActionListener(this);
+        this.triangleTool.addActionListener(this);
         this.colorChooser.addActionListener(this);
         this.undo.addActionListener(this);
 
@@ -42,6 +45,7 @@ public class ToolBar extends JPanel implements ActionListener, ChangeListener {
 
         toolsContainerTop.add(this.squareTool);
         toolsContainerTop.add(this.circleTool);
+        toolsContainerTop.add(this.triangleTool);
         toolsContainerTop.add(this.colorChooser);
 
         toolsContainerBot.add(this.sizeSlider);
@@ -65,12 +69,21 @@ public class ToolBar extends JPanel implements ActionListener, ChangeListener {
             this.w.getControler().setTool(DrawTool.SQUARE);
             this.squareTool.setEnabled(false);
             this.circleTool.setEnabled(true);
+            this.triangleTool.setEnabled(true);
         }
 
         if (actionEvent.getSource() == this.circleTool) {
             this.w.getControler().setTool(DrawTool.CIRCLE);
             this.circleTool.setEnabled(false);
             this.squareTool.setEnabled(true);
+            this.triangleTool.setEnabled(true);
+        }
+
+        if (actionEvent.getSource() == this.triangleTool) {
+            this.w.getControler().setTool(DrawTool.TRIANGLE);
+            this.circleTool.setEnabled(true);
+            this.squareTool.setEnabled(true);
+            this.triangleTool.setEnabled(false);
         }
 
         if (actionEvent.getSource() == this.undo) {

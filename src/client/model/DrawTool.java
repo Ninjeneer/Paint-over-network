@@ -2,5 +2,6 @@ package client.model;
 
 public enum DrawTool {
     CIRCLE,
-    SQUARE
+    SQUARE,
+    TRIANGLE
 }

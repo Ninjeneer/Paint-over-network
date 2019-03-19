@@ -10,13 +10,15 @@ import client.view.shape.Square;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DrawZone extends Canvas implements MouseListener {
+public class DrawZone extends Canvas implements MouseListener, MouseMotionListener {
 
     private Controler ctrl;
     private List<client.view.shape.Shape> content;
+    private boolean isClicking;
 
     public DrawZone(Controler ctrl) {
         super();
@@ -24,6 +26,7 @@ public class DrawZone extends Canvas implements MouseListener {
 
         this.content = new ArrayList<>();
         this.addMouseListener(this);
+        this.addMouseMotionListener(this);
     }
 
     @Override
@@ -41,26 +44,19 @@ public class DrawZone extends Canvas implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        Shape shape = null;
-
-        if (this.ctrl.getTool() == DrawTool.SQUARE)
-            shape = new Square(e.getX() - this.ctrl.getDrawSize() / 2, e.getY() - this.ctrl.getDrawSize() / 2, this.ctrl.getDrawSize(), this.ctrl.getDrawColor());
-        else if (this.ctrl.getTool() == DrawTool.CIRCLE)
-            shape = new Circle(e.getX() - this.ctrl.getDrawSize() / 2, e.getY() - this.ctrl.getDrawSize() / 2, this.ctrl.getDrawSize(), this.ctrl.getDrawColor());
-
-        this.content.add(shape); //ajout de la forme au canvas
-        this.repaint(); //refresh le canvas
-        this.ctrl.getClientManager().sendMessage(this.content); //envoie la mise à jour à tous les clients
+        drawShape(e);
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        this.isClicking = true;
+        System.out.println("click");
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
+        this.isClicking = false;
+        System.out.println("unclick");
     }
 
     @Override
@@ -76,5 +72,29 @@ public class DrawZone extends Canvas implements MouseListener {
     public void setContent(ArrayList<Shape> c) {
         this.content = c;
         this.repaint();
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent mouseEvent) {
+            drawShape(mouseEvent);
+            System.out.println("ok");
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent mouseEvent) {
+    }
+
+    private void drawShape(MouseEvent e) {
+        Shape shape = null;
+
+        if (this.ctrl.getTool() == DrawTool.SQUARE)
+            shape = new Square(e.getX() - this.ctrl.getDrawSize() / 2, e.getY() - this.ctrl.getDrawSize() / 2, this.ctrl.getDrawSize(), this.ctrl.getDrawColor());
+        else if (this.ctrl.getTool() == DrawTool.CIRCLE)
+            shape = new Circle(e.getX() - this.ctrl.getDrawSize() / 2, e.getY() - this.ctrl.getDrawSize() / 2, this.ctrl.getDrawSize(), this.ctrl.getDrawColor());
+
+        this.content.add(shape); //ajout de la forme au canvas
+        this.repaint(); //refresh le canvas
+        this.ctrl.getClientManager().sendMessage(this.content); //envoie la mise à jour à tous les clients
     }
 }

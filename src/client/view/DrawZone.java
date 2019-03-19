@@ -77,8 +77,6 @@ public class DrawZone extends Canvas implements MouseListener, MouseMotionListen
     @Override
     public void mouseDragged(MouseEvent mouseEvent) {
             drawShape(mouseEvent);
-            System.out.println("ok");
-
     }
 
     @Override

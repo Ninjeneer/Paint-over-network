@@ -15,33 +15,40 @@ public class ToolBar extends JPanel implements ActionListener, ChangeListener {
     JButton squareTool;
     JButton circleTool;
     JButton colorChooser;
+    JButton undo;
     JSlider sizeSlider;
 
     public ToolBar(Window w) {
         this.w = w;
         this.setLayout(new GridLayout(2, 1));
-        JPanel toolsContainer = new JPanel(new GridLayout(1, 3));
+        JPanel toolsContainerTop = new JPanel(new GridLayout(1, 3));
+        JPanel toolsContainerBot = new JPanel(new BorderLayout());
 
         this.squareTool = new JButton("Carré");
         this.circleTool = new JButton("Cercle");
         this.circleTool.setEnabled(false);
         this.colorChooser = new JButton("Couleur...");
+        this.undo = new JButton("Undo");
 
         this.squareTool.addActionListener(this);
         this.circleTool.addActionListener(this);
         this.colorChooser.addActionListener(this);
+        this.undo.addActionListener(this);
 
         this.sizeSlider = new JSlider(1, 100);
         this.sizeSlider.setValue(10);
         this.sizeSlider.addChangeListener(this);
         this.w.getControler().setDrawSize(this.sizeSlider.getValue());
 
-        toolsContainer.add(this.squareTool);
-        toolsContainer.add(this.circleTool);
-        toolsContainer.add(this.colorChooser);
+        toolsContainerTop.add(this.squareTool);
+        toolsContainerTop.add(this.circleTool);
+        toolsContainerTop.add(this.colorChooser);
 
-        this.add(toolsContainer);
-        this.add(this.sizeSlider);
+        toolsContainerBot.add(this.sizeSlider);
+        toolsContainerBot.add(this.undo, BorderLayout.EAST);
+
+        this.add(toolsContainerTop);
+        this.add(toolsContainerBot);
         this.setVisible(true);
     }
 
@@ -64,6 +71,10 @@ public class ToolBar extends JPanel implements ActionListener, ChangeListener {
             this.w.getControler().setTool(DrawTool.CIRCLE);
             this.circleTool.setEnabled(false);
             this.squareTool.setEnabled(true);
+        }
+
+        if (actionEvent.getSource() == this.undo) {
+            this.w.getDrawZone().undo();
         }
     }
 

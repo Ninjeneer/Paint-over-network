@@ -89,7 +89,7 @@ public class GerantDeClient implements Runnable, Serializable {
                 this.ts.sendMessage(this, message, objectMode);
 
             } catch (IOException e) {
-                e.printStackTrace();
+                this.disconnect();
             }
         }
     }
@@ -100,7 +100,10 @@ public class GerantDeClient implements Runnable, Serializable {
      * @param s
      */
     public void showMessage(Object s) {
-        this.out.println(Serializer.serialize(s));
+        try {
+            this.out.println(Serializer.serialize(s));
+        } catch (Exception e) {}
+
     }
 
 

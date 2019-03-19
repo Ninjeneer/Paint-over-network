@@ -17,14 +17,17 @@ import java.util.List;
 public class DrawZone extends Canvas implements MouseListener, MouseMotionListener {
 
     private Controler ctrl;
-    private List<client.view.shape.Shape> content;
-    private boolean isClicking;
+    private List<Shape> content;
+    private List<Shape> userContent;
+    private int posX;
+    private int posY;
 
     public DrawZone(Controler ctrl) {
         super();
         this.ctrl = ctrl;
 
         this.content = new ArrayList<>();
+        this.userContent = new ArrayList<>();
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
     }
@@ -44,19 +47,17 @@ public class DrawZone extends Canvas implements MouseListener, MouseMotionListen
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        this.posX = e.getX();
+        this.posY = e.getY();
         drawShape(e);
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        this.isClicking = true;
-        System.out.println("click");
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        this.isClicking = false;
-        System.out.println("unclick");
     }
 
     @Override
@@ -76,7 +77,11 @@ public class DrawZone extends Canvas implements MouseListener, MouseMotionListen
 
     @Override
     public void mouseDragged(MouseEvent mouseEvent) {
+        if (distance(this.posX, this.posY, mouseEvent.getX(), mouseEvent.getY()) > this.ctrl.getDrawSize() / 4) {
             drawShape(mouseEvent);
+            this.posX = mouseEvent.getX();
+            this.posY = mouseEvent.getY();
+        }
     }
 
     @Override
@@ -92,7 +97,29 @@ public class DrawZone extends Canvas implements MouseListener, MouseMotionListen
             shape = new Circle(e.getX() - this.ctrl.getDrawSize() / 2, e.getY() - this.ctrl.getDrawSize() / 2, this.ctrl.getDrawSize(), this.ctrl.getDrawColor());
 
         this.content.add(shape); //ajout de la forme au canvas
+        this.userContent.add(shape); //ajout de la forme dans l'historique des dessins
         this.repaint(); //refresh le canvas
         this.ctrl.getClientManager().sendMessage(this.content); //envoie la mise à jour à tous les clients
+    }
+
+    private int distance(int x, int y, int x1, int y1) {
+        return (int) (Math.sqrt(Math.pow(x1 - x, 2) + Math.pow(y1 - y, 2)));
+    }
+
+    public void undo() {
+        if (this.userContent.size() > 0) {
+            Shape toRemove = this.userContent.remove(this.userContent.size()-1);
+
+            for (Shape s : this.content) {
+                if (s.equals(toRemove)) {
+                    this.content.remove(s);
+                    break;
+                }
+            }
+
+            this.ctrl.getClientManager().sendMessage(this.content); //envoie la mise à jour à tous les clients
+        }
+
+        this.repaint();
     }
 }

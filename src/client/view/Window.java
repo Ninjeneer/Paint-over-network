@@ -36,7 +36,7 @@ public class Window extends JFrame implements ActionListener {
 		// propriétés de la fenêtre
 		this.setLayout(new BorderLayout(15, 5));
 		this.setSize(1000, 600);
-		this.setTitle("Idle Tchat");
+		this.setTitle("Projet prog répartie");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		// création du menu
@@ -83,6 +83,8 @@ public class Window extends JFrame implements ActionListener {
 		this.add(this.menu, BorderLayout.NORTH);
 		this.add(tchatPan);
 		this.add(drawPan, BorderLayout.EAST);
+
+		activateDrawZone(false);
 
 		this.setVisible(true);
 	}
@@ -135,5 +137,7 @@ public class Window extends JFrame implements ActionListener {
 		this.toolBar.circleTool.setEnabled(b);
 		this.toolBar.colorChooser.setEnabled(b);
 		this.toolBar.sizeSlider.setEnabled(b);
+		this.toolBar.undo.setEnabled(b);
+		this.drawZone.setEnabled(b);
 	}
 }

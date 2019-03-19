@@ -24,4 +24,13 @@ public abstract class Shape implements Serializable {
 	}
 
 	public Color getColor() { return this.c; }
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Shape) {
+			Shape s = (Shape)o;
+			return this.x == s.x && this.y == s.y && this.c == s.c;
+		} else
+			return false;
+	}
 }

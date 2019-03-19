@@ -79,6 +79,14 @@ public class GerantDeClient implements Runnable, Serializable {
         // ajoute le client à la liste des clients
         this.ts.addGerantDeClient(this);
 
+        //envoie la zone de dessin actuelle au client
+        try {
+            this.showMessage(this.ts.getDrawZoneSave());
+        } catch(Exception e) {
+
+        }
+
+
         // boucle principale
         while (this.tAlive) {
             try {
@@ -88,7 +96,7 @@ public class GerantDeClient implements Runnable, Serializable {
 
                 this.ts.sendMessage(this, message, objectMode);
 
-            } catch (IOException e) {
+            } catch (Exception e) {
                 this.disconnect();
             }
         }

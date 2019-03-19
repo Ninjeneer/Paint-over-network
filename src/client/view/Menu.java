@@ -63,13 +63,19 @@ public class Menu extends JMenuBar implements ActionListener {
 				} while (pseudo.equals(""));
 
 				try {
+					//Tente de se connecter
 					this.w.getControler().getClientManager().setConnexionInformations(serverAddress, pseudo);
 					this.w.getControler().getClientManager().startConnexion();
 
+					//Commence à récupérer les messages
 					this.w.getControler().getClientManager().setConnected(true);
 					this.w.getControler().getClientManager().startGetMessage();
+
+					//change les boutons
 					this.miConnect.setEnabled(false);
 					this.miDisconnect.setEnabled(true);
+
+					//Active la zone de dessin
 					this.w.activateDrawZone(true);
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(this.w, "Erreur : impossible de se connecter au serveur !", "Erreur",
@@ -83,6 +89,7 @@ public class Menu extends JMenuBar implements ActionListener {
 			this.w.clearTchat();
 			this.miConnect.setEnabled(true);
 			this.miDisconnect.setEnabled(false);
+			this.w.activateDrawZone(false);
 		}
 	}
 }

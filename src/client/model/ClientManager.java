@@ -102,10 +102,6 @@ public class ClientManager {
         });
     }
 
-    public BufferedReader getInputStream() {
-        return this.in;
-    }
-
     /**
      * Défini les informations relatives à la connexion
      *
@@ -115,15 +111,6 @@ public class ClientManager {
     public void setConnexionInformations(String serverAddress, String pseudo) {
         this.serverAddress = serverAddress;
         this.pseudo = pseudo;
-    }
-
-    /**
-     * Retourne l'adresse du serveur cible
-     *
-     * @return adresse IP
-     */
-    public String getServerAddress() {
-        return serverAddress;
     }
 
     /**

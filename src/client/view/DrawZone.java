@@ -70,6 +70,10 @@ public class DrawZone extends Canvas implements MouseListener, MouseMotionListen
 
     }
 
+    /**
+     * Actualise le contenu du canvas
+     * @param c liste de formes
+     */
     public void setContent(ArrayList<Shape> c) {
         this.content = c;
         this.repaint();
@@ -88,6 +92,10 @@ public class DrawZone extends Canvas implements MouseListener, MouseMotionListen
     public void mouseMoved(MouseEvent mouseEvent) {
     }
 
+    /**
+     * Dessine une forme sur le canvas et l'envoie à tous les clients
+     * @param e position
+     */
     private void drawShape(MouseEvent e) {
         Shape shape = null;
 
@@ -102,10 +110,21 @@ public class DrawZone extends Canvas implements MouseListener, MouseMotionListen
         this.ctrl.getClientManager().sendMessage(this.content); //envoie la mise à jour à tous les clients
     }
 
+    /**
+     * Calcul la distance entre deux points
+     * @param x abscisse 1
+     * @param y ordonnée 1
+     * @param x1 abscisse 2
+     * @param y1 ordonnée 2
+     * @return distance entre x et y
+     */
     private int distance(int x, int y, int x1, int y1) {
         return (int) (Math.sqrt(Math.pow(x1 - x, 2) + Math.pow(y1 - y, 2)));
     }
 
+    /**
+     * Annule la dernière opération de l'utilisateur
+     */
     public void undo() {
         if (this.userContent.size() > 0) {
             Shape toRemove = this.userContent.remove(this.userContent.size()-1);

@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import client.view.shape.Shape;
 import commandes.ChangerCouleur;
 import commandes.Commande;
 import commandes.Coucou;
@@ -16,20 +17,7 @@ import commandes.Nick;
 import commandes.Quit;
 import commandes.Who;
 import commandes.Wizz;
-import commandes.admin.AdminHelp;
-import commandes.admin.AdminLogin;
-import commandes.admin.AdminLogoff;
-import commandes.admin.BlockCommand;
-import commandes.admin.GetInfo;
-import commandes.admin.Kick;
-import commandes.admin.KickAll;
-import commandes.admin.Mute;
-import commandes.admin.MuteAll;
-import commandes.admin.Say;
-import commandes.admin.UnBlockCommand;
-import commandes.admin.UnMute;
-import commandes.admin.UnMuteAll;
-import commandes.admin.WizzAll;
+import commandes.admin.*;
 import utils.Affichage;
 
 public class TchatServer {
@@ -38,6 +26,8 @@ public class TchatServer {
     private ServerSocket ss;
     private ArrayList<GerantDeClient> clientList;
     private HashMap<String, Commande> commandListe;
+
+    private ArrayList<Shape> drawZoneSave;
 
     /**
      * Crée un serveur de tchat
@@ -54,8 +44,9 @@ public class TchatServer {
             e.printStackTrace();
         }
 
-        this.clientList = new ArrayList<GerantDeClient>();
-        this.commandListe = new HashMap<String, Commande>();
+        this.clientList = new ArrayList<>();
+        this.commandListe = new HashMap<>();
+        this.drawZoneSave = new ArrayList<>();
 
         // ajout des commandes
         addCommand("coucou", new Coucou());
@@ -80,6 +71,7 @@ public class TchatServer {
         addCommand("unmuteall", new UnMuteAll());
         addCommand("blockcommand", new BlockCommand());
         addCommand("unblockcommand", new UnBlockCommand());
+        addCommand("cleardraw", new ClearDraw());
 
         while (true) {
             // attente du client
@@ -141,8 +133,10 @@ public class TchatServer {
                 if (gdc != sender && !sender.isMuted() && sender.isAlive())
                     if (!objectMode)
                         gdc.showMessage(sender.getCouleur() + sender.getPseudo() + ": " + "\033[0m" + s);
-                    else
+                    else {
                         gdc.showMessage(o);
+                        this.drawZoneSave = (ArrayList<Shape>) o;
+                    }
             }
         }
     }
@@ -208,6 +202,14 @@ public class TchatServer {
      */
     public HashMap<String, Commande> getCommandeList() {
         return this.commandListe;
+    }
+
+    public ArrayList<Shape> getDrawZoneSave() {
+        return this.drawZoneSave;
+    }
+
+    public void resetDrawZoneSave() {
+        this.drawZoneSave = new ArrayList<>();
     }
 
     public static void main(String[] args) {

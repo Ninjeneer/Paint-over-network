@@ -119,19 +119,20 @@ public class Window extends JFrame implements ActionListener {
 		this.taTchat.setCaretPosition(this.taTchat.getDocument().getLength());
 	}
 
-	/**
-	 * Retourne le controleur
-	 *
-	 * @return controleur
-	 */
+
 	public Controler getControler() {
 		return this.ctrl;
 	}
+
 
 	public DrawZone getDrawZone() {
 		return this.drawZone;
 	}
 
+	/**
+	 * Active et désactive la totalité de la zone de dessin
+	 * @param b vrai pour activer
+	 */
 	public void activateDrawZone(boolean b) {
 		this.toolBar.squareTool.setEnabled(b);
 		this.toolBar.circleTool.setEnabled(b);

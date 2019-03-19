@@ -85,6 +85,7 @@ public class Window extends JFrame implements ActionListener {
 		this.add(drawPan, BorderLayout.EAST);
 
 		activateDrawZone(false);
+		activateTchatZone(false);
 
 		this.setVisible(true);
 	}
@@ -140,5 +141,15 @@ public class Window extends JFrame implements ActionListener {
 		this.toolBar.sizeSlider.setEnabled(b);
 		this.toolBar.undo.setEnabled(b);
 		this.drawZone.setEnabled(b);
+	}
+
+	/**
+	 * Active et désactive la totalité de la zone de tchat
+	 * @param b vrai pour activer
+	 */
+	public void activateTchatZone(boolean b) {
+		this.taTchat.setEnabled(b);
+		this.tfInput.setEnabled(b);
+		this.btSend.setEnabled(b);
 	}
 }

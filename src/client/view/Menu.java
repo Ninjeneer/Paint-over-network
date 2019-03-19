@@ -77,6 +77,7 @@ public class Menu extends JMenuBar implements ActionListener {
 
 					//Active la zone de dessin
 					this.w.activateDrawZone(true);
+					this.w.activateTchatZone(true);
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(this.w, "Erreur : impossible de se connecter au serveur !", "Erreur",
 							JOptionPane.ERROR_MESSAGE);

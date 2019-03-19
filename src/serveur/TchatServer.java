@@ -22,7 +22,6 @@ import utils.Affichage;
 
 public class TchatServer {
 
-    public static final boolean debug_mode = true;
     private ServerSocket ss;
     private ArrayList<GerantDeClient> clientList;
     private HashMap<String, Commande> commandListe;
@@ -103,9 +102,11 @@ public class TchatServer {
         if (!objectMode)
             s = o.toString();
 
+        //Si c'est une commande
         if (s.startsWith("/")) {
             String trigger;
 
+            //Si elle contient des arguments
             if (s.contains(" "))
                 trigger = s.substring(1, s.indexOf(" "));
             else
@@ -117,6 +118,7 @@ public class TchatServer {
                 return;
             }
 
+            // si l'utilisateur n'a pas le droit d'utiliser des commandes
             if (!sender.isComandAllowed()) {
                 sender.showMessage(Affichage.red + "ERREUR : vos commandes ont été bloquées par un administrateur !"
                         + Affichage.reset);
@@ -128,15 +130,17 @@ public class TchatServer {
                 sender.showMessage(Affichage.bold + this.commandListe.get(trigger).getError() + Affichage.reset);
 
         } else {
+            // sauvegarde de la zone de dessin
+            if (objectMode)
+                this.drawZoneSave = (ArrayList<Shape>)o;
+
             // envoi du message
             for (GerantDeClient gdc : this.clientList) {
                 if (gdc != sender && !sender.isMuted() && sender.isAlive())
                     if (!objectMode)
                         gdc.showMessage(sender.getCouleur() + sender.getPseudo() + ": " + "\033[0m" + s);
-                    else {
+                    else
                         gdc.showMessage(o);
-                        this.drawZoneSave = (ArrayList<Shape>) o;
-                    }
             }
         }
     }

@@ -82,6 +82,7 @@ public class GerantDeClient implements Runnable, Serializable {
         //envoie la zone de dessin actuelle au client
         try {
             this.showMessage(this.ts.getDrawZoneSave());
+            System.out.println("envoie de : " + this.ts.getDrawZoneSave());
         } catch(Exception e) {
 
         }

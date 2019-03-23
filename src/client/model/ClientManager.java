@@ -17,7 +17,7 @@ import client.view.shape.Shape;
 import utils.Affichage;
 import utils.Serializer;
 
-public class ClientManager {
+public class ClientManager extends Thread {
 
     private String serverAddress;
     private String pseudo;
@@ -71,35 +71,34 @@ public class ClientManager {
     /**
      * Commence la récupération asynchrone des messages
      */
-    public void startGetMessage() {
-        CompletableFuture.runAsync(() -> {
-            try {
-                Object reponse;
-                while (true) {
-                    reponse = Serializer.deserialize(in.readLine());
+    public void run() {
+        System.out.println("exec thread");
+        try {
+            Object reponse;
+            while (true) {
+                reponse = Serializer.deserialize(in.readLine());
 
-                    // récéption d'un message simple
-                    if (reponse instanceof String) {
-                        String message = (String) reponse;
+                // récéption d'un message simple
+                if (reponse instanceof String) {
+                    String message = (String) reponse;
 
-                        // suppression des caractères de format propres à la console
-                        message = message.replace(Affichage.bold, "");
-                        message = message.replace(Affichage.italic, "");
-                        message = message.replace(Affichage.reset, "");
-                        for (String color : Affichage.colors)
-                            message = message.replace(color, "");
+                    // suppression des caractères de format propres à la console
+                    message = message.replace(Affichage.bold, "");
+                    message = message.replace(Affichage.italic, "");
+                    message = message.replace(Affichage.reset, "");
+                    for (String color : Affichage.colors)
+                        message = message.replace(color, "");
 
-                        for (String line : message.split("\n"))
-                            this.ctrl.getWindow().newMessage(line);
-                    } else if (reponse instanceof ArrayList) {
-                        this.ctrl.getWindow().getDrawZone().setContent((ArrayList<Shape>) reponse);
-                        this.ctrl.getWindow().getDrawZone().repaint();
-                    }
+                    for (String line : message.split("\n"))
+                        this.ctrl.getWindow().newMessage(line);
+                } else if (reponse instanceof ArrayList) {
+                    this.ctrl.getWindow().getDrawZone().setContent((ArrayList<Shape>) reponse);
+                    this.ctrl.getWindow().getDrawZone().repaint();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-        });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

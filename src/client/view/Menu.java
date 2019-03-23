@@ -18,6 +18,9 @@ public class Menu extends JMenuBar implements ActionListener {
 	private JMenuItem miConnect;
 	private JMenuItem miDisconnect;
 
+	private String serverAddress;
+	private String pseudo;
+
 
 	/**
 	 * Crée une barre de menu
@@ -64,12 +67,7 @@ public class Menu extends JMenuBar implements ActionListener {
 
 				try {
 					//Tente de se connecter
-					this.w.getControler().getClientManager().setConnexionInformations(serverAddress, pseudo);
-					this.w.getControler().getClientManager().startConnexion();
-
-					//Commence à récupérer les messages
-					this.w.getControler().getClientManager().setConnected(true);
-					this.w.getControler().getClientManager().startGetMessage();
+					this.w.getControler().startClient(serverAddress, pseudo);
 
 					//change les boutons
 					this.miConnect.setEnabled(false);
@@ -93,4 +91,7 @@ public class Menu extends JMenuBar implements ActionListener {
 			this.w.activateDrawZone(false);
 		}
 	}
+
+	public String getServerAddress 	() { return this.serverAddress; }
+	public String getPseudo			() { return this.pseudo; 		}
 }

@@ -130,6 +130,9 @@ public class Window extends JFrame implements ActionListener {
 		return this.drawZone;
 	}
 
+	public String getServerAddress 	() { return this.menu.getServerAddress(); 	}
+	public String getPseudo			() { return this.menu.getPseudo();			}
+
 	/**
 	 * Active et désactive la totalité de la zone de dessin
 	 * @param b vrai pour activer

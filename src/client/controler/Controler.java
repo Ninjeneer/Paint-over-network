@@ -14,9 +14,11 @@ public class Controler {
     private DrawTool drawTool = DrawTool.CIRCLE;
     private Color drawColor = null;
     private int drawSize;
+    private Thread tcm;
 
     public Controler() {
         this.cm = new ClientManager(this);
+        this.tcm = new Thread(this.cm);
         this.w = new Window(this);
     }
 
@@ -26,6 +28,18 @@ public class Controler {
 
     public Window getWindow() {
         return this.w;
+    }
+
+    public void startClient (String serverAddress, String pseudo) {
+        try {
+            System.out.println("start client");
+            this.cm.setConnexionInformations(serverAddress, pseudo);
+            this.cm.startConnexion();
+            this.cm.setConnected(true);
+            this.tcm.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setTool(DrawTool d) {

@@ -72,7 +72,6 @@ public class ClientManager extends Thread {
      * Commence la récupération asynchrone des messages
      */
     public void run() {
-        System.out.println("exec thread");
         try {
             Object reponse;
             while (true) {

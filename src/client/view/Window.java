@@ -97,7 +97,7 @@ public class Window extends JFrame implements ActionListener {
 		if (e.getSource() == this.btSend || e.getSource() == this.tfInput) {
 			if (!this.tfInput.getText().equals("")) {
 				this.ctrl.getClientManager().sendMessage(this.tfInput.getText());
-				this.taTchat.append(this.ctrl.getClientManager().getPseudo() + " : " + this.tfInput.getText() + "\n");
+				this.taTchat.append("Vous  : " + this.tfInput.getText() + "\n");
 				this.tfInput.setText("");
 			}
 		}
